@@ -11,6 +11,7 @@
 #include "machine_types.h"
 #include "parser_types.h"
 #include "lexer.h"
+#include "spl.y"
 
     /* Report an error to the user on stderr */
 extern void yyerror(const char *filename, const char *msg);
@@ -21,7 +22,7 @@ extern void yyerror(const char *filename, const char *msg);
 %define parse.lac full
 %define parse.error detailed
 
- /* the following passes file_name to yyerror,
+/* the following passes file_name to yyerror,
     and declares it as an formal parameter of yyparse. */
 %parse-param { char const *file_name }
 

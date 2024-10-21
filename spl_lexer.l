@@ -76,9 +76,47 @@ static void number2ast(unsigned int val)
 
 %}
 
- /* you can add actual definitions below, before the %% */
+/* you can add actual definitions below, before the %% */
 
+%%
 
+[ \t\r\n]+                /* Ignore whitespace (space, tab, newline) */
+;
+
+"//".*                    /* Ignore comments */
+;
+
+"=="                      { tok2ast(EQ); return EQ; }
+"!="                      { tok2ast(NE); return NE; }
+"<="                      { tok2ast(LE); return LE; }
+">="                      { tok2ast(GE); return GE; }
+"<"                       { tok2ast(LT); return LT; }
+">"                       { tok2ast(GT); return GT; }
+"="                       { tok2ast(ASSIGN); return ASSIGN; }
+"+"                       { tok2ast(PLUS); return PLUS; }
+"-"                       { tok2ast(MINUS); return MINUS; }
+"*"                       { tok2ast(MUL); return MUL; }
+"/"                       { tok2ast(DIV); return DIV; }
+"("                       { tok2ast(LPAREN); return LPAREN; }
+")"                       { tok2ast(RPAREN); return RPAREN; }
+"{"                       { tok2ast(LBRACE); return LBRACE; }
+"}"                       { tok2ast(RBRACE); return RBRACE; }
+";"                       { tok2ast(SEMICOLON); return SEMICOLON; }
+","                       { tok2ast(COMMA); return COMMA; }
+
+[0-9]+                    { number2ast(atoi(yytext)); return NUMBER; }
+[a-zA-Z_][a-zA-Z_0-9]*    { ident2ast(yytext); return IDENTIFIER; }
+
+"if"                      { tok2ast(IF); return IF; }
+"else"                    { tok2ast(ELSE); return ELSE; }
+"while"                   { tok2ast(WHILE); return WHILE; }
+"return"                  { tok2ast(RETURN); return RETURN; }
+"int"                     { tok2ast(INT); return INT; }
+"void"                    { tok2ast(VOID); return VOID; }
+
+.                         { /* Unrecognized character */ }
+
+%%
 
  /* the rules section starts after the %% below */
 
@@ -90,7 +128,7 @@ static void number2ast(unsigned int val)
 
 %%
 
- /* This code goes in the user code section of the spl_lexer.l file,
+/* This code goes in the user code section of the spl_lexer.l file,
    following the last %% above. */
 
 // Requires: fname != NULL

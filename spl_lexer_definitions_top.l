@@ -76,11 +76,11 @@ static void number2ast(unsigned int val)
 
 %}
 
- /* you can add actual definitions below, before the %% */
+/* you can add actual definitions below, before the %% */
 
 
 
- /* the rules section starts after the %% below */
+/* the rules section starts after the %% below */
 
 %%
 

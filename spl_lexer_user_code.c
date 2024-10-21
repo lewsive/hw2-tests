@@ -2,7 +2,7 @@
 
 %%
 
- /* This code goes in the user code section of the spl_lexer.l file,
+/* This code goes in the user code section of the spl_lexer.l file,
    following the last %% above. */
 
 // Requires: fname != NULL
